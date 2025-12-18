@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.skyyeoh.composenoteapp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.skyyeoh.composenoteapp"
@@ -56,4 +56,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.androidx.compose.material.icons.extended)
 }
