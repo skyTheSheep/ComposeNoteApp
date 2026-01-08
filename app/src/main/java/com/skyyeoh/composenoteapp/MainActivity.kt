@@ -12,6 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -22,7 +23,9 @@ import com.skyyeoh.composenoteapp.model.Note
 import com.skyyeoh.composenoteapp.screen.NoteScreen
 import com.skyyeoh.composenoteapp.screen.NoteViewModel
 import com.skyyeoh.composenoteapp.ui.theme.ComposeNoteAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeNoteAppTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
+                    // val noteViewModel = viewModel<NoteViewModel>() also works!!
                     val noteViewModel: NoteViewModel by viewModels()
                     NotesApp(noteViewModel)
                 }
@@ -43,7 +47,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun NotesApp(noteViewModel: NoteViewModel = viewModel()) {
-    NoteScreen(notes = noteViewModel.getAllNotes(),
+    val noteList = noteViewModel.noteList.collectAsState().value
+    NoteScreen(notes = noteList,
         onAddNote = {
             noteViewModel.addNote(it)
         },

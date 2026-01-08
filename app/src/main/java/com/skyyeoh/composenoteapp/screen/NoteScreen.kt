@@ -36,6 +36,7 @@ import com.skyyeoh.composenoteapp.components.NoteButton
 import com.skyyeoh.composenoteapp.components.NoteInputText
 import com.skyyeoh.composenoteapp.data.NotesDataSource
 import com.skyyeoh.composenoteapp.model.Note
+import com.skyyeoh.composenoteapp.util.formatDate
 import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -128,7 +129,7 @@ fun NoteRow(
                 style = MaterialTheme.typography.titleMedium)
             Text(text = note.description,
                 style = MaterialTheme.typography.bodyMedium)
-            Text(text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d MMM")),
+            Text(text = formatDate(note.entryDate.time),
                 style = MaterialTheme.typography.bodySmall)
         }
     }
